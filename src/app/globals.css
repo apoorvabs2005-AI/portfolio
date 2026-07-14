@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: 79 70 229;     /* Indigo 600 */
+  --secondary: 168 85 247;   /* Purple 500 */
+  --accent: 6 182 212;      /* Cyan 500 */
+  --card: #f8fafc;
+  --card-border: #e2e8f0;
+}
+
+:root.dark {
+  --background: #050816;
+  --foreground: #f8fafc;
+  --primary: 99 102 241;    /* Indigo 500 */
+  --secondary: 168 85 247;   /* Purple 500 */
+  --accent: 6 182 212;      /* Cyan 500 */
+  --card: #0b0f26;
+  --card-border: #1e293b;
+}
+
+@theme {
+  --color-primary: rgb(var(--primary));
+  --color-secondary: rgb(var(--secondary));
+  --color-accent: rgb(var(--accent));
+  --color-card-bg: var(--card);
+  --color-card-border: var(--card-border);
+  
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--primary), 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary), 0.6);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(5, 8, 22, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-navbar {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.dark .glass-navbar {
+  background: rgba(5, 8, 22, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom animations and glow effects */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(var(--primary), 0.4), rgba(var(--accent), 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.glow-card:hover::after {
+  opacity: 1;
+}
+
+.glow-shadow {
+  box-shadow: 0 0 25px -5px rgba(var(--primary), 0.2);
+}
+
+.dark .glow-shadow-lg {
+  box-shadow: 0 0 40px -10px rgba(var(--primary), 0.3), 0 0 40px -10px rgba(var(--accent), 0.2);
+}
+
+/* Typing Cursor blink */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  background-color: currentColor;
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 10px rgba(var(--primary), 0.4);
+}
+
+/* Custom cursor hide on body when active */
+.custom-cursor-active {
+  cursor: none;
+}
+.custom-cursor-active a, 
+.custom-cursor-active button,
+.custom-cursor-active input,
+.custom-cursor-active select,
+.custom-cursor-active textarea {
+  cursor: none;
+}
